@@ -2,17 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -21,6 +10,8 @@ use App\Http\Controllers\BayilerController;
 use App\Http\Controllers\BelgelerController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Diller\DilEkleController;
+use App\Http\Controllers\Diller\EnglishController;
+use App\Http\Controllers\Diller\TurkceController;
 use App\Http\Controllers\EkatalogController;
 use App\Http\Controllers\FotogalerController;
 use App\Http\Controllers\FotoSliderController;
@@ -34,11 +25,6 @@ use App\Http\Controllers\SayfalarController;
 use App\Http\Controllers\SubelerController;
 use App\Http\Controllers\UrunlerController;
 use App\Http\Controllers\VideoGalerController;
-
-use App\Http\Controllers\Controller;
-
-
-
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
@@ -111,4 +97,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/ekatalog-show', [EkatalogController::class, 'eKatalogShow'])->name('eKatalogShow');
     Route::get('/menu-ayar', [MenuAyarController::class, 'menuAyarShow'])->name('menuAyarShow');
     Route::get('/diller-show', [DilEkleController::class, 'dillerShow'])->name('dillerShow');
+    Route::get('/diller-showTR', [TurkceController::class, 'dillerShowTr'])->name('dillerShowTr');
+    Route::get('/diller-showEng', [EnglishController::class, 'dillerShowEng'])->name('dillerShowEng');
+
 });

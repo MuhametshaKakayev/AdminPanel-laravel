@@ -13,7 +13,8 @@ class DilekleController extends Controller
      */
     public function dillerShow()
     {
-        return view("pages.diller");
+
+        return view("pages.dilEkle");
     }
 
     /**

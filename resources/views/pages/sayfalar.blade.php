@@ -1,23 +1,30 @@
 <x-layout bodyClass="g-sidenav-show  bg-gray-200">
 
-    <x-navbars.sidebar activePage="genelayar"></x-navbars.sidebar>
+    <x-navbars.sidebar activePage="sayfalar"></x-navbars.sidebar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
-        <x-navbars.navs.auth titlePage="Genel Ayar"></x-navbars.navs.auth>
+        <x-navbars.navs.auth titlePage="Sayfalar"></x-navbars.navs.auth>
 
         <div class="card">
-            <div class="dropdown">
-                <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    Info
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" href="#">Okundu Olarak İşaretle</a></li>
-                    <li><a class="dropdown-item" href="#">Okunmadı Olarak İşaretle</a></li>
-                    <li><a class="dropdown-item" href="#">Seçilenleri Sil</a></li>
-                </ul>
+            <div class="row">
+            <div class="col-md-1">
+                <div class="dropdown">
+                    <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Info
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="#">Seçilenleri Sil</a></li>
+                    </ul>
+                </div>
             </div>
 
+            <div class="col-md-2">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-info waves-effect waves-light w-lg m-b-5">+ Yeni Ekle</button>
+                </div>
+            </div>
+        </div>
 
             <div class="table-responsive">
                 <nav aria-label="Page navigation example">
@@ -84,10 +91,16 @@
                                     <span class="badge badge-sm badge-success">{{ $page->tarih }}</span>
                                 </td>
                                 <td class="align-middle  text-center text-sm">
-                                    <div class="d-flex px-2 py-1">
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-xs">EDİT</h6>
-                                        </div>
+                                    <div class="dropdown">
+                                        <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            işlem
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                            <li><a class="dropdown-item" href="#">Edit</a></li>
+                                            <li><a class="dropdown-item" href="#">Sil</a></li>
+                                        </ul>
                                     </div>
                                 </td>
 

@@ -6,18 +6,26 @@
         <x-navbars.navs.auth titlePage="Blog"></x-navbars.navs.auth>
 
         <div class="card">
-            <div class="dropdown">
-                <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    Info
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" href="#">Okundu Olarak İşaretle</a></li>
-                    <li><a class="dropdown-item" href="#">Okunmadı Olarak İşaretle</a></li>
-                    <li><a class="dropdown-item" href="#">Seçilenleri Sil</a></li>
-                </ul>
-            </div>
 
+            <div class="row">
+                <div class="col-md-1">
+                    <div class="dropdown">
+                        <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Info
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item" href="#">Seçilenleri Sil</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info waves-effect waves-light w-lg m-b-5">+ Yeni Ekle</button>
+                    </div>
+                </div>
+            </div>
 
             <div class="table-responsive">
                 <nav aria-label="Page navigation example">
@@ -50,12 +58,14 @@
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 ID</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Başlık
-                                </th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Url Adres
+                            </th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Url
+                                Adres
                             </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 tarih</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">İŞLEM
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                İŞLEM
                             </th>
 
                         </tr>
@@ -84,10 +94,16 @@
                                     <span class="badge badge-sm badge-success">{{ $blog->tarih }}</span>
                                 </td>
                                 <td class="align-middle  text-center text-sm">
-                                    <div class="d-flex px-2 py-1">
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-xs">EDİT</h6>
-                                        </div>
+                                    <div class="dropdown">
+                                        <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton"
+                                            data-bs-toggle="dropdown" >
+                                            işlem
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                            <li><a class="dropdown-item" href="#">Edit</a></li>
+                                            <li><a class="dropdown-item" href="#">Sil</a></li>
+                                        </ul>
                                     </div>
                                 </td>
 
@@ -95,21 +111,20 @@
 
 
                         </tbody>
-
                     @endforeach
                 </table>
 
             </div>
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-end">
-                  <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
 
-                  <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                  </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
                 </ul>
-              </nav>
+            </nav>
 
         </div>
 

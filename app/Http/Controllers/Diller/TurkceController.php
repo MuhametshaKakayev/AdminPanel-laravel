@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Diller;
 
+use App\Http\Controllers\Controller;
 use App\Models\Turkce;
 use Illuminate\Http\Request;
 
@@ -10,9 +11,9 @@ class TurkceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function dillerShowTr()
     {
-        //
+        return view("pages.dillerTr");
     }
 
     /**

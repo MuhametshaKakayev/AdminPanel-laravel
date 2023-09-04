@@ -33,21 +33,19 @@
                     <span class="nav-link-text ms-1">User Management</span>
                 </a>
             </li>
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pages</h6>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('dashboard') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">dashboard</i>
+                        <i style="font-size: 1rem;" class="material-icons opacity-10">dashboard</i>
                     </div>
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
+                <a class="nav-link text-white {{ $activePage == 'genelayar' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('optionShow') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
@@ -57,7 +55,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
+                <a class="nav-link text-white {{ $activePage == 'gelenMesaj' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('mesageShow') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
@@ -68,7 +66,7 @@
 
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
+                <a class="nav-link text-white {{ $activePage == 'news' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('hbrDuyuruShow') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
@@ -79,7 +77,7 @@
 
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
+                <a class="nav-link text-white {{ $activePage == 'blog' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('blogShow') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
@@ -90,7 +88,7 @@
 
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
+                <a class="nav-link text-white {{ $activePage == 'sayfalar' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('sayfalarShow') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
@@ -101,7 +99,7 @@
 
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
+                <a class="nav-link text-white {{ $activePage == 'urunler' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('urunlerShow') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
@@ -111,7 +109,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
+                <a class="nav-link text-white {{ $activePage == 'hizmetler' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('hizmetShow') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
@@ -121,7 +119,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
+                <a class="nav-link text-white {{ $activePage == 'fotoSlider' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('fotoSliderShow') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
@@ -131,7 +129,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
+                <a class="nav-link text-white {{ $activePage == 'fotoGaleri' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('fotoGaleriShow') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
@@ -141,7 +139,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
+                <a class="nav-link text-white {{ $activePage == 'videoGaleri' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('videoGaleriShow') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
@@ -151,7 +149,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
+                <a class="nav-link text-white {{ $activePage == 'referans' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('referanShow') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
@@ -161,7 +159,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
+                <a class="nav-link text-white {{ $activePage == 'subeler' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('subelerShow') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
@@ -171,7 +169,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
+                <a class="nav-link text-white {{ $activePage == 'bayiler' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('bayilerShow') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
@@ -181,7 +179,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
+                <a class="nav-link text-white {{ $activePage == 'belgeler' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('belgelerShow') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
@@ -191,7 +189,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
+                <a class="nav-link text-white {{ $activePage == 'eKatalog' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('eKatalogShow') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
@@ -201,7 +199,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
+                <a class="nav-link text-white {{ $activePage == 'menuAyar' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('menuAyarShow') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
@@ -210,15 +208,39 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
-                    href="{{ route('dillerShow') }}">
+            <li class="nav-item dropdown">
+                <a class="nav-link text-white {{ $activePage == 'dillerShow' ? ' active bg-gradient-primary' : '' }}"type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" href="#" id="dropdownMenuButton" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
                     </div>
                     <span class="nav-link-text ms-1">Diller</span>
                 </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href="{{ route ("dillerShow") }}">Dil</a></li>
+                    <li><a class="dropdown-item" href="{{"dillerShowTr"}}">Türkce</a></li>
+                    <li><a class="dropdown-item" href="{{"dillerShowEng"}}">İnglizce</a></li>
+                </ul>
             </li>
+
+
+
+
+
+
+
+            {{-- <li class="nav-item">
+                <div class="dropdown nav-link text-white {{ $activePage == 'diller' ? ' active bg-gradient-primary' : '' }}">
+                    <button class="" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="material-icons opacity-10">dashboard</i> Diller
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="{{ route("dillerShow") }}">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </div>
+            </li> --}}
+
 
 
 
@@ -258,7 +280,7 @@
                     </div>
                     <span class="nav-link-text ms-1">RTL</span>
                 </a>
-            </li> 
+            </li>
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'notifications' ? ' active bg-gradient-primary' : '' }}  "
                     href="{{ route('notifications') }}">

@@ -12,7 +12,8 @@ class FotogalerController extends Controller
      */
     public function fotoGaleriShow()
     {
-        return view("pages.fotoGaleri");
+        $fotos=Fotogaler::all();
+        return view("pages.fotoGaleri",compact("fotos"));
     }
 
     /**

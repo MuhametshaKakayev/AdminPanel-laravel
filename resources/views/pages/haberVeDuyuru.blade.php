@@ -83,11 +83,17 @@
                                 <td class="align-middle text-center text-sm">
                                     <span class="badge badge-sm badge-success">{{ $news->tarih }}</span>
                                 </td>
-                                <td class="align-middle  text-center text-sm">
-                                    <div class="d-flex px-2 py-1">
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-xs">EDİT</h6>
-                                        </div>
+                                <td class="align-middle">
+                                    <div class="dropdown">
+                                        <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            işlem
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                            <li><a class="dropdown-item" href="#">Edit</a></li>
+                                            <li><a class="dropdown-item" href="#">Sil</a></li>
+                                        </ul>
                                     </div>
                                 </td>
 

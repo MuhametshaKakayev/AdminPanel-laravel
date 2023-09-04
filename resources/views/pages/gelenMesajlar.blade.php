@@ -76,10 +76,17 @@
                                     <span class="badge badge-sm badge-success">{{ $msgs->tarih }}</span>
                                 </td>
                                 <td class="align-middle">
-                                    <a href class="text-secondary font-weight-normal text-xs" data-toggle="tooltip"
-                                        data-original-title="Edit user">
-                                        Edit
-                                    </a>
+                                    <div class="dropdown">
+                                        <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            işlem
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                            <li><a class="dropdown-item" href="#">Edit</a></li>
+                                            <li><a class="dropdown-item" href="#">Sil</a></li>
+                                        </ul>
+                                    </div>
                                 </td>
 
                             </tr>
