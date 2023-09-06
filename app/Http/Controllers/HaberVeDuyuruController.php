@@ -13,54 +13,58 @@ class HaberVeDuyuruController extends Controller
     public function hbrDuyuruShow()
     {
         $news=HaberVeDuyuru::all();
-        return view("pages.haberVeDuyuru",compact("news"));
+        return view("pages.haber.haberVeDuyuru",compact("news"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function haberEditShow($id)
     {
-        //
+        $news=HaberVeDuyuru::find($id);
+        if (!$news) {
+            return abort(404); // Blog bulunamazsa 404 hatası döndürün.
+        }
+        return view("pages.haber.haberEdit",compact("news"));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+
+
+    public function haberUpdate(Request $request, $id)
+{
+    $url = $request->input('baslik');
+    $modifiedUrl = str_replace(' ', '-', $url) . '.html';
+    $news = HaberVeDuyuru::find($id);
+    if (!$news) {
+        return abort(404); // Blog bulunamazsa 404 hatası döndürün.
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(HaberVeDuyuru $haberVeDuyuru)
+    // Diğer alanları güncellemeyi unutmayın
+    $news->update([
+        "baslik" => $request->input("baslik"),
+        "urlAdres" => $modifiedUrl,
+        "icerik" => $request->input("icerik"),
+        "keywords" => $request->input("keywords"),
+        "description" => $request->input("description"),
+        //Diğer alanlar için de güncelleme ekleyin
+    ]);
+
+    return redirect()->route("blogShow")->with("message", "Başarılı bir şekilde güncellendi");
+}
+
+
+    public function blogDelete($id)
     {
-        //
+        $news = HaberVeDuyuru::find($id);
+
+        if ($news)
+         {
+            $news->delete();
+            return redirect()->back();
+        }
+        else
+        {
+            return redirect()->back();
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(HaberVeDuyuru $haberVeDuyuru)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, HaberVeDuyuru $haberVeDuyuru)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(HaberVeDuyuru $haberVeDuyuru)
-    {
-        //
-    }
 }

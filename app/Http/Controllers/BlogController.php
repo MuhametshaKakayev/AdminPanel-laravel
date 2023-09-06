@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class BlogController extends Controller
 {
@@ -12,54 +13,58 @@ class BlogController extends Controller
      */
     public function blogShow()
     {
-        $blog=Blog::all();
-        return view("pages.blog",compact("blog"));
-    }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $blog = Blog::all();
+        return view("pages.blog.blog", compact("blog"));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function blogEditShow($id)
     {
-        //
+        $blog = Blog::find($id); // Doğru şekilde blogu bulmak için 'find' kullanılır.
+        if (!$blog) {
+            return abort(404); // Blog bulunamazsa 404 hatası döndürün.
+        }
+        return view("pages.blog.blogEdit", compact("blog"));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Blog $blog)
-    {
-        //
+    public function blogUpdate(Request $request, $id)
+{
+    $url = $request->input('baslik');
+    $modifiedUrl = str_replace(' ', '-', $url) . '.html';
+    $blog = Blog::find($id);
+    if (!$blog) {
+        return abort(404); // Blog bulunamazsa 404 hatası döndürün.
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Blog $blog)
+    // Diğer alanları güncellemeyi unutmayın
+    $blog->update([
+        "baslik" => $request->input("baslik"),
+        "urlAdres" => $modifiedUrl,
+        "icerik" => $request->input("icerik"),
+        "keywords" => $request->input("keywords"),
+        "description" => $request->input("description"),
+        //Diğer alanlar için de güncelleme ekleyin
+    ]);
+
+    return redirect()->route("blogShow")->with("message", "Başarılı bir şekilde güncellendi");
+}
+
+
+
+
+    public function blogDelete($id)
     {
-        //
+        $blog = Blog::find($id);
+
+        if ($blog)
+         {
+            $blog->delete();
+            return redirect()->back();
+        }
+        else
+        {
+            return redirect()->back();
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Blog $blog)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Blog $blog)
-    {
-        //
-    }
 }

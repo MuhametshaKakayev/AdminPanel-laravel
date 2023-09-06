@@ -13,7 +13,7 @@ class EnglishController extends Controller
      */
     public function dillerShowEng()
     {
-        return view("pages.dilEkle");
+        return view("pages.diller.dillerEng");
     }
 
     /**

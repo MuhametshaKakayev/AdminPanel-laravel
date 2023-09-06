@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model
 {
+    protected $table = 'Blogs'; // Veritabanı tablosunun adını belirtin
+    protected $fillable=["baslik","urlAdres"];
     use HasFactory;
 }

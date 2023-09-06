@@ -4,7 +4,11 @@
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
         <x-navbars.navs.auth titlePage="Blog"></x-navbars.navs.auth>
-
+        @if (\Session::has('message'))
+        <div class="alert alert-success">
+        <p style="color: white;font-weight:bold">{!! \Session::get('message') !!}</p>
+        </div>
+        @endif
         <div class="card">
 
             <div class="row">
@@ -27,7 +31,7 @@
                 </div>
             </div>
 
-            <div class="table-responsive">
+            <div class="table">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content">
                         <li class="page-item disabled">
@@ -71,41 +75,54 @@
                         </tr>
                     </thead>
 
-                    @foreach ($blog as $blog)
+                    @foreach ($blog as $index=>$blogs)
                         <tbody>
                             <tr>
-                                <td class="align-middle text-center text-sm">1</td>
+                                <td class="align-middle text-center text-sm">{{ $index+1 }}</td>
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-xs">{{ $blog->baslik }}</h6>
+                                            <h6 class="mb-0 text-xs">{{ $blogs->baslik }}</h6>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-xs">{{ $blog->urlAdres }}</h6>
+                                            <h6 class="mb-0 text-xs">{{ $blogs->urlAdres }}</h6>
                                         </div>
                                     </div>
                                 </td>
 
                                 <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm badge-success">{{ $blog->tarih }}</span>
+                                    <span class="badge badge-sm badge-success">{{ $blogs->created_at}}</span>
                                 </td>
-                                <td class="align-middle  text-center text-sm">
+                                <td class="align-middle text-center text-sm">
                                     <div class="dropdown">
                                         <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton"
-                                            data-bs-toggle="dropdown" >
-                                            işlem
+                                            data-bs-toggle="dropdown">
+                                            İşlem
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                                            <li><a class="dropdown-item" href="#">Edit</a></li>
-                                            <li><a class="dropdown-item" href="#">Sil</a></li>
+                                            <li>
+                                                <form action="{{ route('blogEditShow', ['id' => $blogs->id]) }}" method="GET">
+                                                    @method('GET')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-success">EDİT</button>
+                                                </form>
+                                            </li>
+                                            <li>
+                                                <form action="{{ route('blogDelete', ['id' => $blogs->id]) }}" method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-danger">Sil</button>
+                                                </form>
+                                            </li>
                                         </ul>
+                                        
                                     </div>
                                 </td>
+
 
                             </tr>
 

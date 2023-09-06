@@ -10,10 +10,13 @@
 
                 <li style="margin-right: 15px; margin-left: 85px;">
 
-                    <a href="index.php?p=menuler&sil=8"><i style="color:#fb0101;" class="md md-delete"></i></a>
+
                     <a href="index.php?p=menuler&duzenle=8"><i style="color:#fb0101;" class="md md-mode-edit"></i></a>
                     <a style="font-size:14px;line-height:18px;" href="index.php?p=menuler&duzenle=8"><strong>»
                             Anasayfa</strong></a>
+                           <a href=""><i class="material-icons"> delete
+
+                           </i></a>
 
                 </li>
                 <li style="margin-right: 10px;">

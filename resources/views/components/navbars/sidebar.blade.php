@@ -216,11 +216,12 @@
                     <span class="nav-link-text ms-1">Diller</span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" href="{{ route ("dillerShow") }}">Dil</a></li>
-                    <li><a class="dropdown-item" href="{{"dillerShowTr"}}">Türkce</a></li>
-                    <li><a class="dropdown-item" href="{{"dillerShowEng"}}">İnglizce</a></li>
+                    <li><a class="dropdown-item" href="{{ route ("dillerShow")}}">Dil Ekle</a></li>
+                    <li><a class="dropdown-item" href="{{ route ("dillerShowTr")}}">Türkce</a></li>
+                    <li><a class="dropdown-item" href="{{ route ("dillerShowEng")}}">İnglizce</a></li>
                 </ul>
             </li>
+
 
 
 

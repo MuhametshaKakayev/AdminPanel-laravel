@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Diller;
 
-use App\Http\Controllers\Controller;
 use App\Models\Turkce;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class TurkceController extends Controller
@@ -13,7 +13,7 @@ class TurkceController extends Controller
      */
     public function dillerShowTr()
     {
-        return view("pages.dillerTr");
+        return view("pages.diller.dillerTr");
     }
 
     /**

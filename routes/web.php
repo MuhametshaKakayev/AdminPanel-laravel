@@ -1,17 +1,13 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 use App\Http\Controllers\BayilerController;
 use App\Http\Controllers\BelgelerController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Diller\DilEkleController;
-use App\Http\Controllers\Diller\EnglishController;
 use App\Http\Controllers\Diller\TurkceController;
+use App\Http\Controllers\Diller\EnglishController;
 use App\Http\Controllers\EkatalogController;
 use App\Http\Controllers\FotogalerController;
 use App\Http\Controllers\FotoSliderController;
@@ -30,6 +26,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 
+
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::get('/home', function () {return redirect('sign-in');})->middleware('guest');
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
@@ -97,7 +97,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/ekatalog-show', [EkatalogController::class, 'eKatalogShow'])->name('eKatalogShow');
     Route::get('/menu-ayar', [MenuAyarController::class, 'menuAyarShow'])->name('menuAyarShow');
     Route::get('/diller-show', [DilEkleController::class, 'dillerShow'])->name('dillerShow');
-    Route::get('/diller-showTR', [TurkceController::class, 'dillerShowTr'])->name('dillerShowTr');
-    Route::get('/diller-showEng', [EnglishController::class, 'dillerShowEng'])->name('dillerShowEng');
+    Route::get('/diller-showTr',[TurkceController::class, 'dillerShowTr'])->name('dillerShowTr');
+    Route::get('/diller-showEng',[EnglishController::class, 'dillerShowEng'])->name('dillerShowEng');
 
+
+    
+    Route::get('/blog-edit/{id}', [BlogController::class, 'blogEditShow'])->name('blogEditShow');
+    Route::post('/blog-update/{id}', [BlogController::class, 'blogUpdate'])->name('blogUpdate');
+    Route::delete("/blog-delete/{id}",[BlogController::class, 'blogDelete'])->name("blogDelete");
+
+    Route::get('/news-edit/{id}', [HaberVeDuyuruController::class, 'haberEditShow'])->name('haberEditShow');
+    Route::post('/news-update/{id}', [HaberVeDuyuruController::class, 'haberUpdate'])->name('haberUpdate');
+    Route::delete("/news-delete/{id}",[HaberVeDuyuruController::class, 'haberDelete'])->name("haberDelete");
 });

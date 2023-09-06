@@ -14,7 +14,7 @@ class DilekleController extends Controller
     public function dillerShow()
     {
 
-        return view("pages.dilEkle");
+        return view("pages.diller.dilEkle");
     }
 
     /**
