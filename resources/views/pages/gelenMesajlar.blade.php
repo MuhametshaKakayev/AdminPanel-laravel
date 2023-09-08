@@ -82,9 +82,11 @@
                                             işlem
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                                            <li><a class="dropdown-item" href="#">Edit</a></li>
-                                            <li><a class="dropdown-item" href="#">Sil</a></li>
+                                            <li> <form action="{{ route('mesageDelete', ['id' => $msgs->id]) }}"
+                                                method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">Sil</button></form></li>
                                         </ul>
                                     </div>
                                 </td>

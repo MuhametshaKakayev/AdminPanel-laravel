@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Blog extends Model
 {
     protected $table = 'Blogs'; // Veritabanı tablosunun adını belirtin
-    protected $fillable=["baslik","urlAdres"];
+    protected $fillable=["baslik","urlAdres","içerik","arkaGorsel","listGorsel"];
     use HasFactory;
 }

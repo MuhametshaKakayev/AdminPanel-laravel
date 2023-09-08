@@ -16,13 +16,21 @@ class GelenMesajlarController extends Controller
         return view("pages.gelenMesajlar" ,compact("mesajlar"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function mesageDelete($id)
     {
-        //
+        $mesajlar = GelenMesajlar::find($id);
+
+        if ($mesajlar)
+         {
+            $mesajlar->delete();
+            return redirect()->back();
+        }
+        else
+        {
+            return redirect()->back();
+        }
     }
+
 
     /**
      * Store a newly created resource in storage.

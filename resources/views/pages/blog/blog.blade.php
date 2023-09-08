@@ -21,12 +21,23 @@
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <li><a class="dropdown-item" href="#">Seçilenleri Sil</a></li>
                         </ul>
+
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-info waves-effect waves-light w-lg m-b-5">+ Yeni Ekle</button>
+                        <a href="{{ route("blogStoreShow") }}" class="btn btn-info waves-effect waves-light w-lg m-b-5">+ Yeni Ekle</a>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="btn-group">
+                        <form action="{{ route('blogDeleteAll')}}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Sil</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -79,6 +90,7 @@
                         <tbody>
                             <tr>
                                 <td class="align-middle text-center text-sm">{{ $index+1 }}</td>
+
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div class="d-flex flex-column justify-content-center">
@@ -119,7 +131,7 @@
                                                 </form>
                                             </li>
                                         </ul>
-                                        
+
                                     </div>
                                 </td>
 

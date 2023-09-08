@@ -9,21 +9,35 @@
         <div class="alert alert-success">
         <p style="color: white;font-weight:bold">{!! \Session::get('message') !!}</p>
         </div>
+
+        @elseif (\Session::has('error'))
+        <div class="alert alert-success">
+            <p style="color: white;font-weight:bold">{!! \Session::get('error') !!}</p>
+            </div>
+      
         @endif
 
-                <div class="card">
+
+            <div class="row">
+                <div class="col-md-1">
                     <div class="dropdown">
                         <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Info
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" href="#">Okundu Olarak İşaretle</a></li>
-                            <li><a class="dropdown-item" href="#">Okunmadı Olarak İşaretle</a></li>
                             <li><a class="dropdown-item" href="#">Seçilenleri Sil</a></li>
                         </ul>
                     </div>
+                </div>
 
+                <div class="col-md-2">
+                    <div class="btn-group">
+                        <a href="{{ route("haberStoreShow") }}" class="btn btn-info waves-effect waves-light w-lg m-b-5">+ Yeni Ekle</a>
+                    </div>
+                </div>
+
+            </div>
 
                     <div class="table-responsive">
                         <nav aria-label="Page navigation example">
@@ -107,8 +121,7 @@
                                                 </button>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <li>
-                                                        <form action="{{ route('haberEditShow', ['id' => $news->id]) }}"
-                                                            method="GET">
+                                                        <form action="{{ route('haberEditShow', ['id' => $news->id]) }}" method="GET">
                                                             @method('GET')
                                                             @csrf
                                                             <button type="submit" class="btn btn-success">EDİT</button>

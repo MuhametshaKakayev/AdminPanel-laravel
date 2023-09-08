@@ -5,7 +5,7 @@
         <!-- Navbar -->
         <x-navbars.navs.auth titlePage="Haber ve Duyuru Edit"></x-navbars.navs.auth>
         <div class="content-page">
-            
+
             <div class="content" style="background-color: rgb(60, 60, 60)">
                 <div class="container">
                     <div class="row">
@@ -24,8 +24,8 @@
 
                                     <div id="form_status"></div>
 
-                                    <form raction="{{ route('haberUpdate', ['id' => $news->id]) }}" method="POST">
-                                            @method('POST')
+                                    <form action="{{ route('haberUpdate', ['id' => $news->id]) }}" method="POST" enctype="multipart/form-data">
+
                                             @csrf
                                         <div class="form-group input-group input-group-outline my-5">
                                             <label for="baslik" class="col-sm-3 control-label">Başlık</label>
@@ -44,9 +44,8 @@
                                                 Görseli</label>
                                             <div class="col-sm-9">
                                                 <input type="file" class="form-control" id="resim" name="resim"
-                                                    value="">
-                                                <img src="../uploads/thumb/14bc4bfcca.jpg" id="resim_src"
-                                                    width="150" />
+                                                value="{{ $news->listGorsel }}">
+                                                <img src="{{ asset('storage/haber/listGorsel/' . $news->listGorsel) }}" id="logo_src" style="max-width: 100px; max-height: 100px;">
                                                 <p style="margin-left:10px;font-size:13px;margin-top:5px;">
                                                     Yükleyeceğiniz görselin boyutları 295 x 143 px olmalıdır.</p>
                                             </div>
@@ -56,8 +55,8 @@
                                             <label for="resim2" class="col-sm-3 control-label">Arkaplan
                                                 Görseli</label>
                                             <div class="col-sm-9">
-                                                <input type="file" class="form-control" id="resim2" name="resim2"
-                                                    value="">
+                                                <input type="file" class="form-control" id="resim2" name="resim2">
+                                                <img src="{{ asset('storage/haber/arkaGorsel/' . $news->arkaGorsel) }}" id="logo_src" style="max-width: 100px; max-height: 100px;">
                                                 <p style="margin-left:10px;font-size:13px;margin-top:5px;">
                                                     Yükleyeceğiniz görselin boyutları 1600 x 350 px olmalıdır.</p>
                                             </div>
@@ -67,9 +66,10 @@
                                         <div class="form-group input-group input-group-outline my-5">
                                             <label for="icerik" class="col-sm-1 control-label">İçerik</label>
                                             <div class="col-sm-11">
-                                                <textarea class="summernote form-control" rows="9" id="içerik" name="içerik">{{ $news->içerik }}</textarea>
+                                                <textarea class="summernote form-control" rows="9" id="icerik" name="icerik">{{ $news->icerik }}</textarea>
                                             </div>
                                         </div>
+
 
 
                                         <div class="alert alert-info" role="alert"> Google'da rekabeti düşük

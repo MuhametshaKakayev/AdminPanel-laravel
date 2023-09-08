@@ -100,13 +100,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/diller-showTr',[TurkceController::class, 'dillerShowTr'])->name('dillerShowTr');
     Route::get('/diller-showEng',[EnglishController::class, 'dillerShowEng'])->name('dillerShowEng');
 
+    Route::delete("/msg-delete/{id}",[GelenMesajlarController::class, 'mesageDelete'])->name("mesageDelete");
 
-    
+    Route::get('/blog-strShow', [BlogController::class, 'blogStoreShow'])->name('blogStoreShow');
+    Route::post('/blog-store', [BlogController::class, 'blogStore'])->name('blogStore');
     Route::get('/blog-edit/{id}', [BlogController::class, 'blogEditShow'])->name('blogEditShow');
     Route::post('/blog-update/{id}', [BlogController::class, 'blogUpdate'])->name('blogUpdate');
     Route::delete("/blog-delete/{id}",[BlogController::class, 'blogDelete'])->name("blogDelete");
+    Route::delete("/blog-deleteAll",[BlogController::class, 'blogDeleteAll'])->name("blogDeleteAll");
 
     Route::get('/news-edit/{id}', [HaberVeDuyuruController::class, 'haberEditShow'])->name('haberEditShow');
     Route::post('/news-update/{id}', [HaberVeDuyuruController::class, 'haberUpdate'])->name('haberUpdate');
     Route::delete("/news-delete/{id}",[HaberVeDuyuruController::class, 'haberDelete'])->name("haberDelete");
+    Route::get('/news-strShow', [HaberVeDuyuruController::class, 'haberStoreShow'])->name('haberStoreShow');
+    Route::post('/news-store', [HaberVeDuyuruController::class, 'haberStore'])->name('haberStore');
 });
