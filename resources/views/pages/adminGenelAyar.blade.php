@@ -5,6 +5,11 @@
         <!-- Navbar -->
         <x-navbars.navs.auth titlePage="Genel Ayar"></x-navbars.navs.auth>
         <div class="nav-wrapper position-relative end-0">
+            @if (\Session::has('message'))
+                <div class="alert alert-success">
+                    <p style="color: white;font-weight:bold">{!! \Session::get('message') !!}</p>
+                </div>
+            @endif
             <ul class="nav nav-pills nav-fill p-1" role="tablist">
 
                 <li class="nav-item">
@@ -43,314 +48,264 @@
         <div class="tab-content">
             {{-- -------------- SİTE AYAR ------------------ --}}
             <div class="tab-pane fade show active" id="tab-site-ayar" role="tabpanel" aria-labelledby="tab-site-ayar">
+                @foreach ($site_ayar as $ayar)
+                    <form class="w-px-500 p-3 p-md-3 form-horizontal" action="{{ route('optionUpdate') }}"
+                        method="post" enctype="multipart/form-data">
+                        @csrf
 
-                <form>
-                    <div class="input-group input-group-outline my-5">
-                        <label class="form-label">LOGO YUKLE:</label>
-                    </div>
-
-                    <div class="input-group input-group-outline my-3">
-
-                        <input type="file" class="form-control" id="logo" name="logo">
-                        <p style="margin-left:10px;font-size:13px;margin-top:5px;">Yükleyeceğiniz görselin boyutları 188
-                            x 71 px olmalıdır.</p>
-                    </div>
-                </form>
-
-
-                <div class="form-group input-group input-group-outline my-5">
-                    <label for="default_dil" class="col-sm-3 control-label">Default Dil:</label>
-
-                    <div class="col-sm-9">
-
-                        <div class="input-group input-group-static mb-4">
-
-                            <select class="form-control" name="default_dil" id="default_dil">
-                                <option value="oto">Otomatik</option>
-                                <option value="tr" selected="selected">turkce</option>
-                                <option value="en">İngilizce</option>
-                            </select>
+                        <div class="form-group input-group input-group-outline my-5">
+                            <label for="">LOGO YUKLE:</label>
                         </div>
-                    </div>
 
-                </div>
+                        <div class="form-group input-group input-group-outline my-3">
 
-                <label for="permalink" class="col-sm-3 control-label">SEF Link Yapısı:</label>
-                <div class="form-row mb-3">
-
-                    <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="Evet" name="flexRadioDefault"
-                                id="customRadio1">
-                            <label class="custom-control-label" for="customRadio1">Aç</label>
+                            <input type="file" accept=".jpeg, .png, .jpg" class="form-control" id="logo"
+                                name="logo">
+                            <br>
+                            <img src="{{ asset('storage/logo/' . $ayar->logo) }}" id="logo-preview"
+                                style="max-width: 100px; max-height: 100px;">
+                            <p style="margin-left:10px;font-size:13px;margin-top:5px;">
+                                Yükleyeceğiniz görselin boyutları 188
+                                x 71 px olmalıdır.</p>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="Hayir" name="flexRadioDefault"
-                                id="customRadio2">
-                            <label class="custom-control-label" for="customRadio2">Kapat</label>
+
+
+
+                        <div class="form-group input-group input-group-outline my-5">
+                            <label for="default_dil" class="col-sm-3 control-label">Default Dil:</label>
+
+                            <div class="col-sm-9">
+
+                                <div class="input-group input-group-static mb-4">
+
+                                    <select class="form-control" name="default_dil" id="default_dil">
+                                        <option value="oto" {!! $ayar->default_dil === 'oto' ? 'selected' : '' !!}>Otomatik</option>
+                                        <option value="tr" {!! $ayar->default_dil === 'tr' ? 'selected' : '' !!}>Türkçe</option>
+                                        <option value="en" {!! $ayar->default_dil === 'en' ? 'selected' : '' !!}>İngilizce</option>
+                                    </select>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
-                </div>
 
-                <label for="permalink" class="col-sm-3 control-label">Anasayfa slogan:</label>
-                <div class="form-row mb-3">
-
-                    <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="Evet" name="flexRadioDefault"
-                                id="customRadio1">
-                            <label class="custom-control-label" for="customRadio1">Aç</label>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Sef link Yapısı</label>
+                            <div class="col-sm-9">
+                                <input type="radio" name="permalink" value="evet" {!! $ayar->permalink === 'evet' ? 'checked' : '' !!}> Açık
+                                <input type="radio" name="permalink" value="hayir" {!! $ayar->permalink === 'hayir' ? 'checked' : '' !!}> Kapalı
+                            </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="Hayir" name="flexRadioDefault"
-                                id="customRadio2">
-                            <label class="custom-control-label" for="customRadio2">Kapat</label>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Anasayfa Slogan:</label>
+                            <div class="col-sm-9">
+                                <input type="radio" name="aslogan" value="evet" {!! $ayar->aslogan === 'evet' ? 'checked' : '' !!}> Açık
+                                <input type="radio" name="aslogan" value="hayir" {!! $ayar->aslogan === 'hayir' ? 'checked' : '' !!}> Kapalı
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <label for="permalink" class="col-sm-3 control-label">Anasayfa Hizmetler:</label>
-                <div class="form-row mb-3">
-
-                    <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="Evet" name="flexRadioDefault"
-                                id="customRadio1">
-                            <label class="custom-control-label" for="customRadio1">Aç</label>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Anasayfa Hizmetler:</label>
+                            <div class="col-sm-9">
+                                <input type="radio" name="ahizmet" value="evet" {!! $ayar->ahizmet === 'evet' ? 'checked' : '' !!}> Açık
+                                <input type="radio" name="ahizmet" value="hayir" {!! $ayar->ahizmet === 'hayir' ? 'checked' : '' !!}> Kapalı
+                            </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="Hayir" name="flexRadioDefault"
-                                id="customRadio2">
-                            <label class="custom-control-label" for="customRadio2">Kapat</label>
+
+
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Anasayfa Öne Çıkan Ürünler:</label>
+                            <div class="col-sm-9">
+                                <input type="radio" name="aourunler" value="evet" {!! $ayar->aourunler === 'evet' ? 'checked' : '' !!}> Açık
+                                <input type="radio" name="aourunler" value="hayir" {!! $ayar->aourunler === 'hayir' ? 'checked' : '' !!}> Kapalı
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <label for="permalink" class="col-sm-3 control-label">Anasayfa one cıkan urunler:</label>
-                <div class="form-row mb-3">
-
-                    <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="Evet" name="flexRadioDefault"
-                                id="customRadio1">
-                            <label class="custom-control-label" for="customRadio1">Aç</label>
+                        <!-- Anasayfa 3lu bloklar -->
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Anasayfa 3'lü Bloklar:</label>
+                            <div class="col-sm-9">
+                                <input type="radio" name="abloklar" value="evet" {!! $ayar->abloklar === 'evet' ? 'checked' : '' !!}> Açık
+                                <input type="radio" name="abloklar" value="hayir" {!! $ayar->abloklar === 'hayir' ? 'checked' : '' !!}> Kapalı
+                            </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="Hayir" name="flexRadioDefault"
-                                id="customRadio2">
-                            <label class="custom-control-label" for="customRadio2">Kapat</label>
+
+                        <!-- Anasayfa referans -->
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Anasayfa Referans:</label>
+                            <div class="col-sm-9">
+                                <input type="radio" name="areferans" value="evet" {!! $ayar->areferans === 'evet' ? 'checked' : '' !!}> Açık
+                                <input type="radio" name="areferans" value="hayir" {!! $ayar->areferans === 'hayir' ? 'checked' : '' !!}>
+                                Kapalı
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <label for="permalink" class="col-sm-3 control-label">Anasayfa 3lu bloklar:</label>
-                <div class="form-row mb-3">
-
-                    <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="Evet" name="flexRadioDefault"
-                                id="customRadio1">
-                            <label class="custom-control-label" for="customRadio1">Aç</label>
+                        <!-- Tema Renk1 -->
+                        <div class="form-group">
+                            <label for="example-color-input" class="form-control-label">Tema Renk1:</label>
+                            <input class="colorpicker-default form-control" type="text"
+                                value="{{ $ayar->renk1 }}" id="example-color-input" name="renk1">
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="Hayir" name="flexRadioDefault"
-                                id="customRadio2">
-                            <label class="custom-control-label" for="customRadio2">Kapat</label>
+
+                        <!-- Tema Renk2 -->
+                        <div class="form-group">
+                            <label for="example-color-input" class="form-control-label">Tema Renk2:</label>
+                            <input class="colorpicker-default form-control" type="text"
+                                value="{{ $ayar->renk2 }}" id="example-color-input" name="renk2">
                         </div>
-                    </div>
-                </div>
-
-                <label for="permalink" class="col-sm-3 control-label">Anasayfa referans:</label>
-                <div class="form-row mb-3">
-
-                    <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="Evet" name="flexRadioDefault"
-                                id="customRadio1">
-                            <label class="custom-control-label" for="customRadio1">Aç</label>
+                        <div align="center">
+                            <button type="submit" class="btn btn-success">Güncelle</button>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="Hayir" name="flexRadioDefault"
-                                id="customRadio2">
-                            <label class="custom-control-label" for="customRadio2">Kapat</label>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <label for="example-color-input" class="form-control-label">Tema Renk1:</label>
-                    <input class="colorpicker-default form-control" type="text" value="#5e72e4"
-                        id="example-color-input" name="renk1">
-                </div>
-
-
-                <div class="form-group">
-                    <label for="example-color-input" class="form-control-label">Tema Renk2:</label>
-                    <input class="colorpicker-default form-control" type="text" value="#bd2927"
-                        id="example-color-input" name="renk2">
-                </div>
-
-                <div align="center">
-                    <button type="submit" class="btn btn-success">Güncelle</button>
-                </div>
 
             </div>
-
+            </form>
+            @endforeach
 
             {{-- ----- SİTE BİLGİLERİ ------ --}}
 
+
+
             <div class="tab-pane fade" id="tab-site-bilgi" role="tabpanel" aria-labelledby="tab-site-bilgi">
-                <!-- Site Bilgi İçeriği Buraya Gelir -->
-
-                <div class="input-group input-group-lg input-group-outline my-3">
-                    <label class="form-label">Anasayfa Başlık</label>
-                    <input type="text" class="form-control form-control-lg" name="title">
-                </div>
-
-
-                <div class="input-group input-group-lg input-group-outline my-3">
-                    <label class="form-label">Anahtar Kelimeler</label>
-                    <input type="text" class="form-control form-control-lg" name="keywords">
-                </div>
-
-                <div class="input-group input-group-lg input-group-outline my-3">
-                    <label class="form-label">Site açiklaması(description):</label>
-                    <input type="text" class="form-control form-control-lg" name="description">
-                </div>
-
-                <div class="input-group input-group-lg input-group-outline my-3">
-                    <label class="form-label">Facebook</label>
-                    <input type="text" class="form-control form-control-lg" name="facebook">
-                </div>
+                <form class="w-px-500 p-3 p-md-3 form-horizontal" action="{{ route('optInfoUpdate') }}"
+                    method="post" enctype="multipart/form-data">
+                    @foreach ($site_bilgi as $bilgi)
+                        @csrf
+                        <!-- Site Bilgi İçeriği Buraya Gelir -->
 
 
-                <div class="input-group input-group-lg input-group-outline my-3">
-                    <label class="form-label">Facebook</label>
-                    <input type="text" class="form-control form-control-lg" name="facebook">
-                </div>
-
-
-                <div class="input-group input-group-lg input-group-outline my-3">
-                    <label class="form-label">Twitter</label>
-                    <input type="text" class="form-control form-control-lg" name="twitter">
-                </div>
-
-
-                <div class="input-group input-group-lg input-group-outline my-3">
-                    <label class="form-label">İnstagram</label>
-                    <input type="text" class="form-control form-control-lg" name="instagram">
-                </div>
-
-
-                <div class="input-group input-group-lg input-group-outline my-3">
-                    <label class="form-label">Google+</label>
-                    <input type="text" class="form-control form-control-lg" name="googlePlus">
-                </div>
-
-
-                <div class="input-group input-group-lg input-group-outline my-3">
-                    <label class="form-label">Google maps</label>
-                    <input type="text" class="form-control form-control-lg" name="googleMaps">
-                </div>
-
-
-                <div class="input-group input-group-lg input-group-outline my-3">
-                    <label class="form-label">Slogan1</label>
-                    <input type="text" class="form-control form-control-lg" name="slogan1">
-                </div>
-
-
-                <div class="input-group input-group-lg input-group-outline my-3">
-                    <label class="form-label">Slogan 2</label>
-                    <input type="text" class="form-control form-control-lg" name="slogan2">
-                </div>
-
-
-                <div class="input-group input-group-lg input-group-outline my-3">
-                    <label class="form-label">Telefon</label>
-                    <input type="text" class="form-control form-control-lg" name="telefon">
-                </div>
-
-                <div class="input-group input-group-lg input-group-outline my-3">
-                    <label class="form-label">Faks</label>
-                    <input type="text" class="form-control form-control-lg" name="faks">
-                </div>
-
-                <div class="input-group input-group-lg input-group-outline my-3">
-                    <label class="form-label">E-posta</label>
-                    <input type="text" class="form-control form-control-lg" name="eposta">
-                </div>
-
-                <div class="input-group input-group-lg input-group-outline my-3">
-                    <label for="adres" class="col-sm-3 control-label">Adres</label>
-                    <div class="col-sm-9">
-                        <textarea class="form-control" rows="5" id="adres" name="adres">Lorem ipsum dolor sit ametipsum dolor sit amet İstanbul/Türkiye</textarea>
-                    </div>
-
-                    <div class="input-group input-group-lg input-group-outline my-3">
-                        <label for="analytics" class="col-sm-3 control-label">Analytics Kodu</label>
-                        <div class="col-sm-9">
-                            <textarea class="form-control" rows="5" id="analytics" name="analytics"></textarea>
+                        <div class="input-group input-group-static mb-4">
+                            <label for="title">Anasayfa başlık</label>
+                            <input type="text" class="form-control" name="title" id="title"
+                                value="{{ $bilgi->title }}">
                         </div>
-                    </div>
-                </div>
-                <div align="center">
-                    <button type="submit" class="btn btn-success">Güncelle</button>
-                </div>
-            </div>
 
+
+
+                        <div class="input-group input-group-static mb-4">
+                            <label for="">Anahtar Kelimeler</label>
+                            <input type="text" class="form-control" name="keywords"
+                                value="{{ $bilgi->keywords }}">
+                        </div>
+
+                        <div class="input-group input-group-static mb-4">
+                            <label for="">Site açiklaması(description):</label>
+                            <input type="text" class="form-control" name="description"
+                                value="{{ $bilgi->descriptions }}">
+                        </div>
+
+                        <div class="input-group input-group-static mb-4">
+                            <label for="">Facebook</label>
+                            <input type="text" class="form-control" name="facebook"
+                                value="{{ $bilgi->facebook }}">
+                        </div>
+
+
+
+
+                        <div class="input-group input-group-static mb-4">
+                            <label for="">Twitter</label>
+                            <input type="text" class="form-control" name="twitter" value="{{ $bilgi->twitter }}">
+                        </div>
+
+
+                        <div class="input-group input-group-static mb-4">
+                            <label for="">İnstagram</label>
+                            <input type="text" class="form-control" name="instagram"
+                                value="{{ $bilgi->instagram }}">
+                        </div>
+
+
+                        <div class="input-group input-group-static mb-4">
+                            <label for="">Google+</label>
+                            <input type="text" class="form-control" name="googlePlus"
+                                value="{{ $bilgi->googlePlus }}">
+                        </div>
+
+
+                        <div class="input-group input-group-static mb-4">
+                            <label for="">Google maps</label>
+                            <input type="text" class="form-control" name="google_maps"
+                                value="{{ $bilgi->google_maps }}">
+                        </div>
+
+
+                        <div class="input-group input-group-static mb-4">
+                            <label for="">Slogan1</label>
+                            <input type="text" class="form-control" name="slogan1"
+                                value="{{ $bilgi->slogan1 }}">
+                        </div>
+
+
+                        <div class="input-group input-group-static mb-4">
+                            <label for="">Slogan 2</label>
+                            <input type="text" class="form-control" name="slogan2"
+                                value="{{ $bilgi->slogan2 }}">
+                        </div>
+
+
+                        <div class="input-group input-group-static mb-4">
+                            <label for="">Telefon</label>
+                            <input type="text" class="form-control" name="telefon"
+                                value="{{ $bilgi->telefon }}">
+                        </div>
+
+                        <div class="input-group input-group-static mb-4">
+                            <label for="">Faks</label>
+                            <input type="text" class="form-control" name="faks" value="{{ $bilgi->faks }}">
+                        </div>
+
+                        <div class="input-group input-group-static mb-4">
+                            <label for="">E-posta</label>
+                            <input type="text" class="form-control" name="eposta" value="{{ $bilgi->eposta }}">
+                        </div>
+
+                        <div class="form-group input-group input-group-outline my-5">
+                            <label for="adres" class="col-sm-1 control-label">Adres</label>
+                            <div class="col-sm-11">
+                                <textarea class="form-control" rows="9" id="adres" name="adres">{{ $bilgi->adres }}</textarea>
+                            </div>
+
+                            <div class="form-group input-group input-group-outline my-5">
+                                <label for="analytics"class="col-sm-1 control-label">Analytics Kodu</label>
+                                <div class="col-sm-11">
+                                    <textarea class="form-control" rows="5" id="analytics" name="analytics">{{ $bilgi->analytics }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div align="center">
+                            <button type="submit" class="btn btn-success">Güncelle</button>
+                        </div>
+            </div>
+            @endforeach
 
             {{-- ----- SMTP BİLGİLERİ ------ --}}
 
             <div class="tab-pane fade" id="tab-smtp-ayar" role="tabpanel" aria-labelledby="tab-smtp-ayar">
-                <!-- Smtp Ayar İçeriği Buraya Gelir -->
+                <form class="w-px-500 p-3 p-md-3 form-horizontal" action="{{ route('optInfoUpdate') }}" method="post" enctype="multipart/form-data">
+                    @csrf
 
-                <div class="alert alert-info" role="alert">İletişim formunuzun
-                    çalışabilmesi için aşağıdaki bilgileri doldurmak zorunludur. Lütfen
-                    sistem yöneticinizden, sizin için bir e-posta hesabı oluşturmasını ve
-                    aşağıdaki bilgileri isteyiniz.</div>
+                    @foreach ($smtp_ayar as $smtp)
+                    <!-- Smtp Ayar İçeriği Buraya Gelir -->
 
+                    <div class="alert alert-info" role="alert">İletişim formunuzun çalışabilmesi için aşağıdaki bilgileri doldurmak zorunludur. Lütfen sistem yöneticinizden, sizin için bir e-posta hesabı oluşturmasını ve aşağıdaki bilgileri isteyiniz.</div>
 
-                <form>
                     <label for="smtp_host" class="col-sm-3 control-label">SMTP Server:</label>
                     <div class="input-group input-group-outline my-3">
-                        <input class="form-control" type="text" placeholder="Örn: mail.domain.com"
-                            value="mail.example.com" name="smtp_host" id="smtp_host">
+                        <input class="form-control" type="text" placeholder="Örn: mail.domain.com" value="{{ $smtp-> smtp_host }}" name="smtp_host" id="smtp_host">
                     </div>
-
 
                     <label for="smtp_port" class="col-sm-3 control-label">SMTP Port:</label>
                     <div class="input-group input-group-outline my-3">
-                        <input class="form-control" type="text" placeholder="Örn: mail.domain.com"
-                            value="mail.example.com" name="smtp_port" id="smtp_port">
+                        <input class="form-control" type="text" placeholder="Örn: 587" value="{{ $smtp-> smtp_port }}" name="smtp_port" id="smtp_port">
                     </div>
-
-
-
 
                     <label for="ePosta" class="col-sm-3 control-label">E-posta:</label>
                     <div class="input-group input-group-outline my-3">
-                        <input type="text" class="form-control" id="smtp_username" name="smtp_username"
-                            placeholder="Örn: info@example.com" value="info@example.com">
+                        <input type="text" class="form-control" id="smtp_usermail" name="smtp_usermail" placeholder="Örn: info@example.com" value="{{ $smtp-> smpt_usermail}}">
                     </div>
 
                     <label for="sifre" class="col-sm-3 control-label">Şifre:</label>
                     <div class="input-group input-group-outline my-3">
-                        <input type="text" class="form-control" id="smtp_password" name="smtp_password"
-                        value="123456">
+                        <input type="password" class="form-control" id="smtp_password" name="smtp_password" value="{{ $smtp-> smtp_password }}">
                     </div>
 
                     <label for="smtp_protocol" class="col-sm-3 control-label">SMTP protokol:</label>
@@ -358,22 +313,19 @@
                         <div class="col-sm-9">
                             <select name="smtp_protokol" id="smtp_protokol" class="form-control">
                                 <option value="">Yok</option>
-                                <option value="tls" selected="selected">TLS</option>
-                                <option value="ssl">SSL</option>
+                                <option value="tls" {{ $smtp-> smpt_protokol  == 'tls' ? 'selected' : '' }}>TLS</option>
+                                <option value="ssl" {{ $smtp-> smpt_protokol  == 'ssl' ? 'selected' : '' }}>SSL</option>
                             </select>
+                        </div>
                     </div>
+                    @endforeach
 
-
-
+                    <div align="center">
+                        <button type="submit" class="btn btn-success">Güncelle</button>
+                    </div>
                 </form>
-
-
-
             </div>
-            <div align="center">
-                <button type="submit" class="btn btn-success">Güncelle</button>
-            </div>
-        </div>
+
 
     </main>
     <x-plugins></x-plugins>

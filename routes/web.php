@@ -1,6 +1,8 @@
 <?php
 
 
+
+use App\Http\Controllers\GenelAyar\SmtpAyarController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BayilerController;
 use App\Http\Controllers\BelgelerController;
@@ -13,6 +15,7 @@ use App\Http\Controllers\FotogalerController;
 use App\Http\Controllers\FotoSliderController;
 use App\Http\Controllers\GelenMesaj\GelenMesajlarController;
 use App\Http\Controllers\GenelAyar\SiteAyarController;
+use App\Http\Controllers\GenelAyar\SiteBilgiController;
 use App\Http\Controllers\HaberVeDuyuruController;
 use App\Http\Controllers\HizmetlerController;
 use App\Http\Controllers\MenuAyarController;
@@ -80,7 +83,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/genel-ayar', [SiteAyarController::class, 'optionShow'])->name('optionShow');
+
     Route::get('/gelen-mesaj', [GelenMesajlarController::class, 'mesageShow'])->name('mesageShow');
     Route::get('/haber-duyuru', [HaberVeDuyuruController::class, 'hbrDuyuruShow'])->name('hbrDuyuruShow');
     Route::get('/blog-show', [BlogController::class, 'blogShow'])->name('blogShow');
@@ -101,6 +104,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/diller-showEng',[EnglishController::class, 'dillerShowEng'])->name('dillerShowEng');
 
     Route::delete("/msg-delete/{id}",[GelenMesajlarController::class, 'mesageDelete'])->name("mesageDelete");
+
+    Route::get('/genel-ayar', [SiteAyarController::class, 'optionShow'])->name('optionShow');
+    Route::post('/genelayar-update', [SiteAyarController::class, 'optionUpdate'])->name('optionUpdate');
+    Route::post('/genelayarinfo-update', [SiteBilgiController::class, 'optInfoUpdate'])->name('optInfoUpdate');
+    Route::post('/genelayarSmpt-update', [SmtpAyarController::class, 'optSmptUpdate'])->name('optSmptUpdate');
+
 
     Route::get('/blog-strShow', [BlogController::class, 'blogStoreShow'])->name('blogStoreShow');
     Route::post('/blog-store', [BlogController::class, 'blogStore'])->name('blogStore');

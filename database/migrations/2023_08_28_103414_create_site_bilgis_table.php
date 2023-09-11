@@ -19,14 +19,15 @@ return new class extends Migration
             $table->string("facebook");
             $table->string("twitter");
             $table->string("instagram");
+            $table->string("google+");
             $table->string("google_maps");
-            $table->string("slogan");
             $table->string("slogan1");
+            $table->string("slogan2");
             $table->string("telefon");
             $table->string("faks");
             $table->string("email");
             $table->string("adres");
-
+            $table->string("analytics");
             $table->timestamps();
         });
     }

@@ -6,9 +6,9 @@
         <x-navbars.navs.auth titlePage="Blog Edit"></x-navbars.navs.auth>
         <div class="content-page">
             @if (\Session::has('success'))
-            <div class="alert alert-success">
-            <p style="color: white;font-weight:bold">{!! \Session::get('success') !!}</p>
-            </div>
+                <div class="alert alert-success">
+                    <p style="color: white;font-weight:bold">{!! \Session::get('success') !!}</p>
+                </div>
             @endif
             <div class="content" style="background-color: rgb(60, 60, 60)">
                 <div class="container">
@@ -19,7 +19,6 @@
                         </div>
                     </div>
 
-
                     <div class="row">
 
                         <!-- Col 1 -->
@@ -29,27 +28,27 @@
 
                                     <div id="form_status"></div>
 
-                                    <form  action="{{ route('blogUpdate', ['id' => $blog->id]) }}" method="POST" enctype="multipart/form-data" >
+                                    <form action="{{ route('blogUpdate', ['id' => $blog->id]) }}" method="POST"
+                                        enctype="multipart/form-data">
 
                                         @csrf
 
                                         <div class="form-group input-group input-group-outline my-5">
                                             <label for="baslik" class="col-sm-3 control-label">Yazı Başlık</label>
                                             <div class="col-sm-9">
-                                                <input type="text" required class="form-control" id="baslik" name="baslik" value="{{ $blog->baslik }}" placeholder="">
+                                                <input type="text" required class="form-control" id="baslik"
+                                                    name="baslik" value="{{ $blog->baslik }}" placeholder="">
                                             </div>
                                         </div>
-
-
-
-
 
                                         <div class="form-group input-group input-group-outline my-5">
                                             <label for="resim" class="col-sm-3 control-label">Listeleme
                                                 Görseli</label>
                                             <div class="col-sm-9">
-                                                <input type="file" accept=".jpeg, .png, .jpg" class="form-control" id="resim" name="resim" >
-                                                <img src="{{ asset('storage/blog/listGorsel/' . $blog->listGorsel) }}" id="logo_src" style="max-width: 100px; max-height: 100px;">
+                                                <input type="file" accept=".jpeg, .png, .jpg" class="form-control"
+                                                    id="resim" name="resim">
+                                                <img src="{{ asset('storage/blog/listGorsel/' . $blog->listGorsel) }}"
+                                                    id="logo_src" style="max-width: 100px; max-height: 100px;">
                                                 <p style="margin-left:10px;font-size:13px;margin-top:5px;">
                                                     Yükleyeceğiniz görselin boyutları 295 x 143 px olmalıdır.
                                                 </p>
@@ -60,8 +59,10 @@
                                             <label for="resim2" class="col-sm-3 control-label">Arkaplan
                                                 Görseli</label>
                                             <div class="col-sm-9">
-                                                <input type="file" accept=".jpeg, .png, .jpg" class="form-control" id="resim2" name="resim2">
-                                                <img src="{{ asset('storage/blog/arkaGorsel/' . $blog->arkaGorsel) }}" id="logo_src" style="max-width: 100px; max-height: 100px;">
+                                                <input type="file" accept=".jpeg, .png, .jpg" class="form-control"
+                                                    id="resim2" name="resim2">
+                                                <img src="{{ asset('storage/blog/arkaGorsel/' . $blog->arkaGorsel) }}"
+                                                    id="logo_src" style="max-width: 100px; max-height: 100px;">
                                                 <p style="margin-left:10px;font-size:13px;margin-top:5px;">
                                                     Yükleyeceğiniz görselin boyutları 1600 x 350 px olmalıdır.</p>
                                             </div>
@@ -98,7 +99,6 @@
                                             </div>
                                         </div>
 
-
                                         <div class="form-group input-group input-group-outline my-5">
                                             <label for="description" class="col-sm-3 control-label">SEO Açıklama
                                                 (Description)</label>
@@ -107,17 +107,11 @@
                                             </div>
                                         </div>
 
-
-
-
                                         <div align="center">
-                                            <button type="submit" class="btn btn-success"
-                                                >Kaydet</button>
+                                            <button type="submit" class="btn btn-success">Kaydet</button>
                                         </div>
 
                                     </form>
-
-
 
                                 </div>
                             </div>

@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('site_ayars', function (Blueprint $table) {
             $table->id();
-            $table->boolean("permalink");
-            $table->boolean("aslogan");
-            $table->boolean("ahizmet");
-            $table->boolean("aourunler");
-            $table->boolean("abloklar");
-            $table->boolean("areferans");
+            $table->string("logo");
+            $table->string("default_dil");
+            $table->string("permalink");
+            $table->string("aslogan");
+            $table->string("ahizmet");
+            $table->string("aourunler");
+            $table->string("abloklar");
+            $table->string("areferans");
             $table->string("renk1");
             $table->string("renk2");
             $table->timestamps();
