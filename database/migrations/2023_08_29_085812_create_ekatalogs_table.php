@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('ekatalogs', function (Blueprint $table) {
             $table->id();
+            $table->string("baslik");
+            $table->string("sira");
+            $table->string("dosya");
             $table->timestamps();
         });
     }

@@ -8,29 +8,32 @@
         <div class="card">
 
             <div class="row">
-            <div class="col-md-1">
-                <div class="dropdown">
-                    <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Info
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="#">Seçilenleri Sil</a></li>
-                    </ul>
+                <div class="col-md-1">
+                    <div class="dropdown">
+                        <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Info
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item" href="#">Seçilenleri Sil</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-2">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-info waves-effect waves-light w-lg m-b-5">+ Yeni Ekle</button>
+                <div class="col-md-2">
+                    <div class="btn-group">
+                        <a href="{{ route('urunlerStoreShow') }}"
+                            class="btn btn-info waves-effect waves-light w-lg m-b-5">+ Yeni Ekle</a>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="btn-group">
+                        <a href="{{ route('kategoriShow') }}" class="btn btn-info waves-effect waves-light w-lg m-b-5">+
+                            Kategori</a>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-info waves-effect waves-light w-lg m-b-5">+ Yeni kategori</button>
-                </div>
-            </div>
-        </div>
 
             <div class="table-responsive">
                 <nav aria-label="Page navigation example">
@@ -63,81 +66,101 @@
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 ID</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Başlık
-                                </th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Url Adres
                             </th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Öne Çıkan
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Url
+                                Adres
+                            </th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Öne
+                                Çıkan
                             </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 tarih</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">İŞLEM
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                İŞLEM
                             </th>
 
                         </tr>
                     </thead>
 
-                    {{-- @foreach ($pages as $page) --}}
+                    @foreach ($urunler as $index => $urun)
                         <tbody>
                             <tr>
-                                <td class="align-middle text-center text-sm">1</td>
+                                <td class="align-middle text-center text-sm">{{ $index+1 }}</td>
+
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div class="d-flex flex-column justify-content-center">
-                                            {{-- <h6 class="mb-0 text-xs">{{ $page->baslik }}</h6> --}}
+                                            <h6 class="mb-0 text-xs">{{ $urun->baslik }}</h6>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div class="d-flex flex-column justify-content-center">
-                                            {{-- <h6 class="mb-0 text-xs">{{ $page->urlAdres }}</h6> --}}
+                                            <h6 class="mb-0 text-xs">{{ $urun->urlAdres }}</h6>
                                         </div>
                                     </div>
                                 </td>
+
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div class="d-flex flex-column justify-content-center">
-                                            {{-- <h6 class="mb-0 text-xs">{{ $page->onecıkan }}</h6> --}}
+                                            <h6 class="mb-0 text-xs">{{ $urun->oneCikan }}</h6>
                                         </div>
                                     </div>
                                 </td>
 
                                 <td class="align-middle text-center text-sm">
-                                    {{-- <span class="badge badge-sm badge-success">{{ $page->tarih }}</span> --}}
+                                    <span class="badge badge-sm badge-success">{{ $urun->created_at }}</span>
                                 </td>
-                                <td class="align-middle  text-center text-sm">
+
+                                <td class="align-middle text-center text-sm">
                                     <div class="dropdown">
-                                        <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            işlem
+                                        <button class="btn bg-gradient-info dropdown-toggle" type="button"
+                                            id="dropdownMenuButton" data-bs-toggle="dropdown">
+                                            İşlem
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                                            <li><a class="dropdown-item" href="#">Edit</a></li>
-                                            <li><a class="dropdown-item" href="#">Sil</a></li>
+                                            <li>
+                                                <form action="{{ route('urunlerEditShow', ['id' => $urun->id]) }}"
+                                                    method="GET">
+                                                    @method('GET')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-success">EDİT</button>
+                                                </form>
+                                            </li>
+                                            <li>
+                                                <form action="{{ route('urunDelete', ['id' => $urun->id]) }}"
+                                                    method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-danger">Sil</button>
+                                                </form>
+                                            </li>
                                         </ul>
+
                                     </div>
                                 </td>
+
 
                             </tr>
 
 
                         </tbody>
-
-                    {{-- @endforeach --}}
+                    @endforeach
                 </table>
 
             </div>
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-end">
-                  <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
 
-                  <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                  </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
                 </ul>
-              </nav>
+            </nav>
 
         </div>
 

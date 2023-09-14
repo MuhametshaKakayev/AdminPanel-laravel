@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('bayilers', function (Blueprint $table) {
             $table->id();
+            $table->string("lokasyon");
+            $table->string("sira");
+            $table->string("adres");
+            $table->string("telefon");
+             $table->string("gsm");
+            $table->string("email");
+            $table->string("google_maps");
             $table->timestamps();
         });
     }

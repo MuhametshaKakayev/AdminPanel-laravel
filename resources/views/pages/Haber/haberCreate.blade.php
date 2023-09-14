@@ -73,26 +73,26 @@
                                             Google'da rekabeti düşük kelimelerde organik olarak ilk sayfaya yükselmek için mutlaka aşağıdaki bilgileri doldurunuz. Sadece sayfa içeriği ile alakalı bilgiler girmelisiniz. Aksi halde spam cezası alabilirsiniz.
                                         </div>
 
-                                        {{-- <div class="form-group input-group input-group-outline my-5">
+                                        <div class="form-group input-group input-group-outline my-5">
                                             <label for="title" class="col-sm-3 control-label">SEO Başlık (Title)</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $news->seo->title) }}">
+                                                <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $news->title) }}">
                                             </div>
                                         </div>
 
                                         <div class="form-group input-group input-group-outline my-5">
                                             <label for="keywords" class="col-sm-3 control-label">SEO Kelimeler (Keywords)</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="keywords" name="keywords" value="{{ old('keywords', $news->seo->keywords) }}">
+                                                <input type="text" class="form-control" id="keywords" name="keywords" value="{{ old('keywords', $news->keywords) }}">
                                             </div>
                                         </div>
 
                                         <div class="form-group input-group input-group-outline my-5">
                                             <label for="description" class="col-sm-3 control-label">SEO Açıklama (Description)</label>
                                             <div class="col-sm-9">
-                                                <textarea class="form-control" rows="5" id="description" name="description">{{ old('description', $news->seo->description) }}</textarea>
+                                                <textarea class="form-control" rows="5" id="description" name="description">{{ old('description', $news->description) }}</textarea>
                                             </div>
-                                        </div> --}}
+                                        </div>
 
                                         <div align="center">
                                             <button type="submit" class="btn btn-success">Kaydet</button>

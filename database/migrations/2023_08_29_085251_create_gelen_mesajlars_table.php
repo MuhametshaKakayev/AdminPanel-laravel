@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('gelen_mesajlars', function (Blueprint $table) {
-            $table->string("adi-soyadi");
+            $table->id();
+            $table->string("adiSoyadi");
             $table->string("telefon");
-            $table->string("e-posta");
+            $table->string("ePosta");
             $table->string("tarih");
             $table->timestamps();
         });

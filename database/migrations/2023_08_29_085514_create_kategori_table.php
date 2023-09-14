@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subelers', function (Blueprint $table) {
+        Schema::create('kategori', function (Blueprint $table) {
             $table->id();
-            $table->string("lokasyon");
+            $table->string("kBaslik");
             $table->string("sira");
-            $table->string("adres");
-            $table->string("telefon");
-             $table->string("gsm");
-            $table->string("email");
-            $table->string("google_maps");
+            $table->string("listGorsel");
+            $table->string("arkaGorsel");
+            $table->string("aciklama");
+            $table->string("title");
+            $table->string("keywords");
+            $table->string("description");
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subelers');
+        Schema::dropIfExists('sayfalars');
     }
 };

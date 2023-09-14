@@ -1,11 +1,18 @@
 <x-layout bodyClass="g-sidenav-show  bg-gray-200">
 
-    <x-navbars.sidebar activePage="sayfalar"></x-navbars.sidebar>
+    <x-navbars.sidebar activePage="urunler"></x-navbars.sidebar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
-        <x-navbars.navs.auth titlePage="Sayfalar"></x-navbars.navs.auth>
+        <x-navbars.navs.auth titlePage="Kategori"></x-navbars.navs.auth>
+
+        @if (\Session::has('message'))
+        <div class="alert alert-success">
+        <p style="color: white;font-weight:bold">{!! \Session::get('message') !!}</p>
+        </div>
+        @endif
 
         <div class="card">
+
             <div class="row">
             <div class="col-md-1">
                 <div class="dropdown">
@@ -21,7 +28,7 @@
 
             <div class="col-md-2">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-info waves-effect waves-light w-lg m-b-5">+ Yeni Ekle</button>
+                    <a href="{{ route("kategoristoreShow") }}" class="btn btn-info waves-effect waves-light w-lg m-b-5">+ Yeni Ekle</a>
                 </div>
             </div>
         </div>
@@ -60,6 +67,8 @@
                                 </th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Url Adres
                             </th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Sıra
+                            </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 tarih</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">İŞLEM
@@ -68,39 +77,58 @@
                         </tr>
                     </thead>
 
-                    @foreach ($pages as $page)
+                    @foreach ($kategori as $kategori)
                         <tbody>
                             <tr>
                                 <td class="align-middle text-center text-sm">1</td>
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-xs">{{ $page->baslik }}</h6>
+                                            <h6 class="mb-0 text-xs">{{ $kategori->kBaslik }}</h6>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-xs">{{ $page->urlAdres }}</h6>
+                                            <h6 class="mb-0 text-xs">{{ $kategori->urlAdres }}</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex px-2 py-1">
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="mb-0 text-xs">{{ $kategori->sira }}</h6>
                                         </div>
                                     </div>
                                 </td>
 
                                 <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm badge-success">{{ $page->tarih }}</span>
+                                    <span class="badge badge-sm badge-success">{{ $kategori->created_at }}</span>
                                 </td>
-                                <td class="align-middle  text-center text-sm">
+                                <td class="align-middle text-center text-sm">
                                     <div class="dropdown">
                                         <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            işlem
+                                            data-bs-toggle="dropdown">
+                                            İşlem
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                                            <li><a class="dropdown-item" href="#">Edit</a></li>
-                                            <li><a class="dropdown-item" href="#">Sil</a></li>
+                                            <li>
+                                                <form action="{{ route('kategoriEditShow', ['id' => $kategori->id]) }}" method="GET">
+                                                    @method('GET')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-success">EDİT</button>
+                                                </form>
+                                            </li>
+                                            <li>
+                                                <form action="{{ route('kategoriDelete', ['id' => $kategori->id]) }}" method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-danger">Sil</button>
+                                                </form>
+                                            </li>
                                         </ul>
+
                                     </div>
                                 </td>
 

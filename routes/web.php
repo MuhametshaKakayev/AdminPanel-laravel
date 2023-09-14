@@ -2,7 +2,7 @@
 
 
 
-use App\Http\Controllers\GenelAyar\SmtpAyarController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BayilerController;
 use App\Http\Controllers\BelgelerController;
@@ -16,6 +16,7 @@ use App\Http\Controllers\FotoSliderController;
 use App\Http\Controllers\GelenMesaj\GelenMesajlarController;
 use App\Http\Controllers\GenelAyar\SiteAyarController;
 use App\Http\Controllers\GenelAyar\SiteBilgiController;
+use App\Http\Controllers\GenelAyar\SmtpAyarController;
 use App\Http\Controllers\HaberVeDuyuruController;
 use App\Http\Controllers\HizmetlerController;
 use App\Http\Controllers\MenuAyarController;
@@ -87,8 +88,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/gelen-mesaj', [GelenMesajlarController::class, 'mesageShow'])->name('mesageShow');
     Route::get('/haber-duyuru', [HaberVeDuyuruController::class, 'hbrDuyuruShow'])->name('hbrDuyuruShow');
     Route::get('/blog-show', [BlogController::class, 'blogShow'])->name('blogShow');
-    Route::get('/sayfalar', [SayfalarController::class, 'sayfalarShow'])->name('sayfalarShow');
-    Route::get('/urunler', [UrunlerController::class, 'urunlerShow'])->name('urunlerShow');
+
+
     Route::get('/hizmetler', [HizmetlerController::class, 'hizmetShow'])->name('hizmetShow');
     Route::get('/fotoSlider-show', [FotoSliderController::class, 'fotoSliderShow'])->name('fotoSliderShow');
     Route::get('/fotoGaleri-show', [FotogalerController::class, 'fotoGaleriShow'])->name('fotoGaleriShow');
@@ -108,7 +109,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/genel-ayar', [SiteAyarController::class, 'optionShow'])->name('optionShow');
     Route::post('/genelayar-update', [SiteAyarController::class, 'optionUpdate'])->name('optionUpdate');
     Route::post('/genelayarinfo-update', [SiteBilgiController::class, 'optInfoUpdate'])->name('optInfoUpdate');
-    Route::post('/genelayarSmpt-update', [SmtpAyarController::class, 'optSmptUpdate'])->name('optSmptUpdate');
+    Route::post('/genelayarSmpt-update', [SmtpAyarController::class, 'smtpUpdate'])->name('smtpUpdate');
 
 
     Route::get('/blog-strShow', [BlogController::class, 'blogStoreShow'])->name('blogStoreShow');
@@ -118,9 +119,31 @@ Route::middleware(['auth'])->group(function () {
     Route::delete("/blog-delete/{id}",[BlogController::class, 'blogDelete'])->name("blogDelete");
     Route::delete("/blog-deleteAll",[BlogController::class, 'blogDeleteAll'])->name("blogDeleteAll");
 
-    Route::get('/news-edit/{id}', [HaberVeDuyuruController::class, 'haberEditShow'])->name('haberEditShow');
+    Route::get('/news-editShow/{id}', [HaberVeDuyuruController::class, 'haberEditShow'])->name('haberEditShow');
     Route::post('/news-update/{id}', [HaberVeDuyuruController::class, 'haberUpdate'])->name('haberUpdate');
     Route::delete("/news-delete/{id}",[HaberVeDuyuruController::class, 'haberDelete'])->name("haberDelete");
     Route::get('/news-strShow', [HaberVeDuyuruController::class, 'haberStoreShow'])->name('haberStoreShow');
     Route::post('/news-store', [HaberVeDuyuruController::class, 'haberStore'])->name('haberStore');
+
+    Route::get('/sayfalar-show', [SayfalarController::class, 'sayfalarShow'])->name('sayfalarShow');
+    Route::get('/sayfalar-storeShow', [SayfalarController::class, 'sayfaStoreShow'])->name('sayfaStoreShow');
+    Route::post('/sayfalar-store', [SayfalarController::class, 'sayfaStore'])->name('sayfaStore');
+    Route::get('/sayfalar-editShow/{id}', [SayfalarController::class, 'sayfaEditShow'])->name('sayfaEditShow');
+    Route::post('/sayfalar-edit/{id}', [SayfalarController::class, 'sayfaUpdate'])->name('sayfaUpdate');
+    Route::delete("/sayfa-delete/{id}",[SayfalarController::class, 'sayfaDelete'])->name("sayfaDelete");
+
+    Route::get('/kategori-show', [UrunlerController::class, 'kategoriShow'])->name('kategoriShow');
+    Route::get('/kategori-storeShow', [UrunlerController::class, 'kategoristoreShow'])->name('kategoristoreShow');
+    Route::post('/kategori-store', [UrunlerController::class, 'kategoriStore'])->name('kategoriStore');
+    Route::get('/kategori-editShow/{id}', [UrunlerController::class, 'kategoriEditShow'])->name('kategoriEditShow');
+    Route::post('/kategori-edit/{id}', [UrunlerController::class, 'kategoriEdit'])->name('kategoriEdit');
+    Route::delete("/kategori-delete/{id}",[UrunlerController::class, 'kategoriDelete'])->name("kategoriDelete");
+
+
+    Route::get('/urunler', [UrunlerController::class, 'urunlerShow'])->name('urunlerShow');
+    Route::get('/urunler-storShow', [UrunlerController::class, 'urunlerStoreShow'])->name('urunlerStoreShow');
+    Route::post('/urunler-store', [UrunlerController::class, 'urunlerStore'])->name('urunlerStore');
+    Route::get('/urunler-editShow/{id}', [UrunlerController::class, 'urunlerEditShow'])->name('urunlerEditShow');
+    Route::post('/urun-edit/{id}', [UrunlerController::class, 'urunEdit'])->name('urunEdit');
+    Route::delete("/urun-delete/{id}",[UrunlerController::class, 'urunDelete'])->name("urunDelete");
 });

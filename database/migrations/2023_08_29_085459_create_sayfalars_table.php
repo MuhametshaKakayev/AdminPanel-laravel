@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('sayfalars', function (Blueprint $table) {
             $table->id();
+            $table->string("baslik");
+            $table->string("urlAdres");
+            $table->string("listGorsel");
+            $table->string("arkaGorsel");
+            $table->string("icerik");
+            $table->string("title");
+            $table->string("keywords");
+            $table->string("description");
             $table->timestamps();
         });
     }

@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('hizmetlers', function (Blueprint $table) {
             $table->id();
+            $table->string("baslik");
+            $table->string("kisa_icerik");
+            $table->string("link");
+            $table->string("icon");
+            $table->string("anasayfa");
+            $table->string("arkaGorsel");
+            $table->string("icerik");
+            $table->string("title");
+            $table->string("keywords");
+            $table->string("description");
             $table->timestamps();
         });
     }

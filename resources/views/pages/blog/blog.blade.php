@@ -31,7 +31,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-2">
+                {{-- <div class="col-md-2">
                     <div class="btn-group">
                         <form action="{{ route('blogDeleteAll')}}" method="POST">
                             @method('DELETE')
@@ -39,7 +39,7 @@
                             <button type="submit" class="btn btn-danger">Sil</button>
                         </form>
                     </div>
-                </div>
+                </div> --}}
             </div>
 
             <div class="table">
@@ -109,6 +109,7 @@
                                 <td class="align-middle text-center text-sm">
                                     <span class="badge badge-sm badge-success">{{ $blogs->created_at}}</span>
                                 </td>
+                                
                                 <td class="align-middle text-center text-sm">
                                     <div class="dropdown">
                                         <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton"

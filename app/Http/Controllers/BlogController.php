@@ -10,6 +10,22 @@ use Illuminate\Support\Facades\Session;
 
 class BlogController extends Controller
 {
+
+    public function blogShow()
+    {
+        $blog = Blog::all();
+        return view("pages.blog.blog", compact("blog"));
+    }
+
+    public function blogEditShow($id)
+    {
+        $blog = Blog::find($id); // Doğru şekilde blogu bulmak için 'find' kullanılır.
+        if (!$blog) {
+            return abort(404); // Blog bulunamazsa 404 hatası döndürün.
+        }
+        return view("pages.blog.blogEdit", compact("blog"));
+    }
+
     public function blogStoreShow()
     {
         $blog = new Blog();
@@ -22,6 +38,9 @@ class BlogController extends Controller
         $validatedData = $request->validate([
             'baslik' => 'required|string|max:255',
             'içerik' => 'required',
+            'title' => 'required',
+            'keywords' => 'required',
+            'description' => 'required',
             'arkaGorsel' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             // Örnek: JPEG veya PNG formatında, 2MB'den küçük
             'listGorsel' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -42,8 +61,6 @@ class BlogController extends Controller
         $file1->storeAs('public/blog/arkaGorsel', $resim1);
 
 
-
-
         // Yeni Haber Kaydı Oluşturma
         $blog = new Blog();
         $blog->baslik = $validatedData['baslik'];
@@ -51,6 +68,9 @@ class BlogController extends Controller
         $blog->içerik = $validatedData['içerik'];
         $blog->listGorsel = $resim;
         $blog->arkaGorsel = $resim1;
+        $blog->title = $validatedData['title'];
+        $blog->keywords = $validatedData['keywords'];
+        $blog->description = $validatedData['description'];
 
         $blog->save();
 
@@ -110,54 +130,33 @@ class BlogController extends Controller
             "baslik" => $request->input("baslik"),
             "urlAdres" => $urlAdres,
             "içerik" => $request->input("içerik"),
+            "title" => $request->input("title"),
+            "keywords" => $request->input("keywords"),
+            "description" => $request->input("description"),
 
         ]);
 
         return redirect()->route("blogShow")->with("message", "Başarılı bir şekilde güncellendi");
     }
-    public function blogShow()
-    {
-        $blog = Blog::all();
-        return view("pages.blog.blog", compact("blog"));
-    }
 
-    public function blogEditShow($id)
-    {
-        $blog = Blog::find($id); // Doğru şekilde blogu bulmak için 'find' kullanılır.
-        if (!$blog) {
-            return abort(404); // Blog bulunamazsa 404 hatası döndürün.
-        }
-        return view("pages.blog.blogEdit", compact("blog"));
-    }
 
 
     public function blogDelete($id)
-    {
-        $blog = Blog::find($id);
+{
+    $blog = Blog::find($id);
 
-        if (!$blog) {
-            return redirect()->route('blogShow')->with('error', 'Silinecek Blog yok');
-        }
+    if ($blog->listGorsel !== '' && $blog->arkaGorsel !== '') {
 
+        Storage::delete('public/blog/listGorsel/' . $blog->listGorsel);
+        Storage::delete('public/blog/arkaGorsel/' . $blog->arkaGorsel);
 
-        try {
-            if ($blog->listGorsel !== '') {
-                Storage::delete('public/haber/listGorsel/' . $blog->listGorsel);
-            }
-            if ($blog->arkaGorsel !== '') {
-                Storage::delete('public/haber/arkaGorsel/' . $blog->arkaGorsel);
-            }
+        // Dosyaları başarıyla sildikten sonra veriyi veritabanından kaldırın
+        $blog->delete();
 
-            // Dosyaları başarıyla sildikten sonra veriyi veritabanından kaldırın
-            $blog->delete();
+        return redirect()->route('blogShow')->with("message", "Başarılı bir şekilde silindi");
 
-            return redirect()->route('blogShow')->with("message", "Başarılı bir şekilde silindi");
-
-        } catch (\Exception $e) {
-            // Hata durumunda kullanıcıya hata mesajı gösterin
-            return redirect()->route('blogShow')->with('error', 'Delete failed: ' . $e->getMessage());
-        }
     }
+}
 
     public function blogDeleteAll()
     {

@@ -86,7 +86,7 @@
                                                 (Title)</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="title" name="title"
-                                                    value="Adipisci velitNeque porro quisquam est">
+                                                value="{{ $blog->title }}">
                                             </div>
                                         </div>
 
@@ -95,7 +95,7 @@
                                                 (Keywords)</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="keywords"
-                                                    name="keywords" value="Adipisci velitNeque porro quisquam est">
+                                                    name="keywords" value="{{ $blog->keywords }}">
                                             </div>
                                         </div>
 
@@ -103,7 +103,7 @@
                                             <label for="description" class="col-sm-3 control-label">SEO Açıklama
                                                 (Description)</label>
                                             <div class="col-sm-9">
-                                                <textarea class="form-control" rows="5" id="description" name="description">Adipisci velitNeque porro quisquam est</textarea>
+                                                <textarea class="form-control" rows="5" id="description" name="description">{{ $blog->description }}</textarea>
                                             </div>
                                         </div>
 

@@ -155,9 +155,8 @@
                         <div align="center">
                             <button type="submit" class="btn btn-success">Güncelle</button>
                         </div>
-
+                    </form>
             </div>
-            </form>
             @endforeach
 
             {{-- ----- SİTE BİLGİLERİ ------ --}}
@@ -197,9 +196,6 @@
                             <input type="text" class="form-control" name="facebook"
                                 value="{{ $bilgi->facebook }}">
                         </div>
-
-
-
 
                         <div class="input-group input-group-static mb-4">
                             <label for="">Twitter</label>
@@ -274,58 +270,85 @@
                         <div align="center">
                             <button type="submit" class="btn btn-success">Güncelle</button>
                         </div>
+                </form>
             </div>
             @endforeach
 
             {{-- ----- SMTP BİLGİLERİ ------ --}}
 
             <div class="tab-pane fade" id="tab-smtp-ayar" role="tabpanel" aria-labelledby="tab-smtp-ayar">
-                <form class="w-px-500 p-3 p-md-3 form-horizontal" action="{{ route('optInfoUpdate') }}" method="post" enctype="multipart/form-data">
-                    @csrf
+                @foreach ($smtp_ayar as $smtp)
+                    <form class="w-px-500 p-3 p-md-3 form-horizontal" action="{{ route('smtpUpdate') }}"
+                        method="post" enctype="multipart/form-data">
+                        @csrf
 
-                    @foreach ($smtp_ayar as $smtp)
-                    <!-- Smtp Ayar İçeriği Buraya Gelir -->
+                        <!-- Smtp Ayar İçeriği Buraya Gelir -->
 
-                    <div class="alert alert-info" role="alert">İletişim formunuzun çalışabilmesi için aşağıdaki bilgileri doldurmak zorunludur. Lütfen sistem yöneticinizden, sizin için bir e-posta hesabı oluşturmasını ve aşağıdaki bilgileri isteyiniz.</div>
-
-                    <label for="smtp_host" class="col-sm-3 control-label">SMTP Server:</label>
-                    <div class="input-group input-group-outline my-3">
-                        <input class="form-control" type="text" placeholder="Örn: mail.domain.com" value="{{ $smtp-> smtp_host }}" name="smtp_host" id="smtp_host">
-                    </div>
-
-                    <label for="smtp_port" class="col-sm-3 control-label">SMTP Port:</label>
-                    <div class="input-group input-group-outline my-3">
-                        <input class="form-control" type="text" placeholder="Örn: 587" value="{{ $smtp-> smtp_port }}" name="smtp_port" id="smtp_port">
-                    </div>
-
-                    <label for="ePosta" class="col-sm-3 control-label">E-posta:</label>
-                    <div class="input-group input-group-outline my-3">
-                        <input type="text" class="form-control" id="smtp_usermail" name="smtp_usermail" placeholder="Örn: info@example.com" value="{{ $smtp-> smpt_usermail}}">
-                    </div>
-
-                    <label for="sifre" class="col-sm-3 control-label">Şifre:</label>
-                    <div class="input-group input-group-outline my-3">
-                        <input type="password" class="form-control" id="smtp_password" name="smtp_password" value="{{ $smtp-> smtp_password }}">
-                    </div>
-
-                    <label for="smtp_protocol" class="col-sm-3 control-label">SMTP protokol:</label>
-                    <div class="input-group input-group-outline my-3">
-                        <div class="col-sm-9">
-                            <select name="smtp_protokol" id="smtp_protokol" class="form-control">
-                                <option value="">Yok</option>
-                                <option value="tls" {{ $smtp-> smpt_protokol  == 'tls' ? 'selected' : '' }}>TLS</option>
-                                <option value="ssl" {{ $smtp-> smpt_protokol  == 'ssl' ? 'selected' : '' }}>SSL</option>
-                            </select>
+                        <div class="alert alert-info" role="alert">
+                            İletişim formunuzun çalışabilmesi için aşağıdaki bilgileri doldurmak zorunludur. Lütfen
+                            sistem yöneticinizden, sizin için bir e-posta hesabı oluşturmasını ve aşağıdaki bilgileri
+                            isteyiniz.
                         </div>
-                    </div>
-                    @endforeach
 
-                    <div align="center">
-                        <button type="submit" class="btn btn-success">Güncelle</button>
-                    </div>
-                </form>
+                        <div class="input-group input-group-static mb-4">
+                            <label for="">Host</label>
+                            <input type="text" class="form-control" name="host"
+                                value="{{ $smtp->host }}">
+                        </div>
+
+                        <label for="smtp_port" class="col-sm-3 control-label">SMTP Portu:</label>
+                        <div class="input-group input-group-outline my-3">
+                            <input class="form-control" type="text" placeholder="Örn: 587"
+                                value="{{ $smtp->port }}" name="port" id="port">
+                        </div>
+
+                        <label for="ePosta" class="col-sm-3 control-label">E-posta:</label>
+                        <div class="input-group input-group-outline my-3">
+                            <input type="text" class="form-control" id="usermail" name="usermail"
+                                placeholder="Örn: info@example.com" value="{{ $smtp->usermail }}">
+                        </div>
+
+                        <label for="sifre" class="col-sm-3 control-label">Şifre:</label>
+                        <div class="input-group input-group-outline my-3">
+                            <input type="password" class="form-control" id="password" name="password"
+                                value="{{ $smtp->password }}">
+                        </div>
+
+
+                        <div class="col-sm-9">
+
+                            <div class="input-group input-group-static mb-4">
+
+                                <select class="form-control" name="protokol" id="protokol">
+                                    <option value="tls" {!! $smtp->protokol === 'tls' ? 'selected' : '' !!}>tls</option>
+                                    <option value="ssl" {!! $smtp->protokol === 'ssl' ? 'selected' : '' !!}>ssl</option>
+                                    <option value="Yok" {!! $smtp->protokol === 'Yok' ? 'selected' : '' !!}>yok</option>
+                                </select>
+                            </div>
+                        </div>
+{{--
+                        <label for="smtp_protocol" class="col-sm-3 control-label">SMTP Protokolü:</label>
+                        <div class="input-group input-group-outline my-3">
+                            <div class="col-sm-9">
+                                <select name="smtp_protokol" id="smtp_protokol" class="form-control">
+                                    <option value="">Yok</option>
+                                    <option value="tls" {{ $smtp->protokol == 'tls' ? 'selected' : '' }}>TLS
+                                    </option>
+                                    <option value="ssl" {{ $smtp->protokol == 'ssl' ? 'selected' : '' }}>SSL
+                                    </option>
+                                </select>
+                            </div>
+                        </div> --}}
+
+                        <div align="center">
+                            <button type="submit" class="btn btn-success">Güncelle</button>
+                        </div>
+                    </form>
+                @endforeach
             </div>
 
+
+        </div>
 
     </main>
     <x-plugins></x-plugins>

@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('smtp_ayars', function (Blueprint $table) {
             $table->id();
-            $table->string("smtp_host");
-            $table->string("smtp_port");
-            $table->string("smpt_protokol");
-            $table->string("smpt_usermail");
-            $table->string("smtp_password");
+            $table->string("host");
+            $table->string("port");
+            $table->string("protokol");
+            $table->string("usermail");
+            $table->string("password");
             $table->timestamps();
         });
     }

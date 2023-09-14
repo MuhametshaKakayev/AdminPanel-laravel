@@ -5,18 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Urunler extends Model
+class Kategori extends Model
 {
-    protected $table = 'urunlers'; // Veritabanı tablosunun adı
+    protected $table = 'kategori'; // Veritabanı tablosunun adı
 
     protected $fillable = [
-        'urlAdres',
-        'baslik',
-        'oneCikan',
-        'urunKategori',
+        'kBaslik',
+        'sira',
         'listGorsel',
         'arkaGorsel',
-        'icerik',
+        'aciklama',
         'title',
         'keywords',
         'description',

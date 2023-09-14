@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('menu_ayars', function (Blueprint $table) {
             $table->id();
+            $table->string("ustu");
+            $table->string("baslik");
+            $table->string("sira");
+            $table->string("sayfa");
+            $table->string("url");
             $table->timestamps();
         });
     }

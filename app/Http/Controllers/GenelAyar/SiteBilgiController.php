@@ -11,7 +11,7 @@ class SiteBilgiController extends Controller
     public function optInfoUpdate(Request $request)
     {
 
-        $optionsİnfo = SiteBilgi::all();
+
         $optionsİnfo = SiteBilgi::first();
 
         $optionsİnfo->update([

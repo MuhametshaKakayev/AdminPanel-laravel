@@ -7,20 +7,20 @@ use App\Models\GenelAyar\SmtpAyar;
 
 class SmtpAyarController extends Controller
 {
-    public function optSmptUpdate(Request $request)
-    {
+    public function smtpUpdate(Request $request)
+{
+    $optionsSmpt = SmtpAyar::first();
 
-        $optionsSmpt = SmtpAyar::all();
-        $optionsSmpt = SmtpAyar::first();
+    $optionsSmpt->update([
+        "host" => $request->input('host'),
+        "port" => $request->input('port'),
+        "protokol" => $request->input('protokol'), // Düzeltildi
+        "usermail" => $request->input('usermail'),
+        "password" => $request->input('password'),
+    ]);
 
-        $optionsSmpt->update([
-            "smtp_host" => $request->input('smtp_host'),
-            "smtp_port" => $request->input('smtp_port'),
-            "smpt_protokol" => $request->input('smpt_protokol'),
-            "smpt_usermail" => $request->input('smpt_usermail'),
-            "smtp_password" => $request->input('smtp_password'),
-        ]);
+    return redirect()->route("optionShow")->with("message", "Başarılı bir şekilde güncellendi");
+}
 
-        return redirect()->route("optionShow")->with("message","Başarılı bir şekilde güncellendi" );
-    }
+
 }
